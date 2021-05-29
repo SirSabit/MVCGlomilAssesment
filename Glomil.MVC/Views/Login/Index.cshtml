@@ -39,6 +39,7 @@
                     <div class="form-group col">
                         <input type="text" class="form-control" placeholder="Enter your Nick" name="NickName" />
                         <small style="text-align:left" id="NickName" class="form-text text-muted">Because Nick Names are cool!</small>
+                        
                     </div>
                     <div class="form-group col">
                         <input type="password" class="form-control" placeholder="Enter Your Password" name="Password" />
@@ -47,7 +48,7 @@
                     <div class="form-group col">
                         <button type="submit" class="btn btn-danger btn-block">Login</button>
 
-                        <small>Don't have account yet? <a href="#">Register</a></small>
+                        <small>Don't have account yet? <a asp-action="Index" asp-controller="Register">Register</a></small>
                     </div>
                 </form>
             </div>
