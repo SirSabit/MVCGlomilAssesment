@@ -1,4 +1,4 @@
-﻿
+﻿@model RegisterViewModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -11,22 +11,32 @@
             <h3 style="text-align:center">Register</h3>
             <form asp-action="Index" asp-controller="Register" method="post">
                 <div class="form-group col">
-                    <input type="text" class="form-control" placeholder="Enter your Name" name="Name" />
+                    <span id="errorSpan" asp-validation-for="Name"></span>
+                    <input type="text" class="form-control" placeholder="Enter your Name" asp-for="Name" />
+                    <span><small>For instance: Peter</small></span>
                 </div>
                 <div class="form-group col">
-                    <input type="text" class="form-control" placeholder="Enter your Surname" name="Surname" />
+                    <span id="errorSpan" asp-validation-for="Surname"></span>
+                    <input type="text" class="form-control" placeholder="Enter your Surname" asp-for="Surname" />
+                    <span><small>For instance: Parker</small></span>
                 </div>
                 <div class="form-group col">
-                    <input type="text" class="form-control" placeholder="Enter your Nickname" name="NickName" />
+                    <span id="errorSpan" asp-validation-for="NickName"></span>
+                    <input type="text" class="form-control" placeholder="Enter your Nickname" asp-for="NickName" />
+                    <span><small>For instance: Spiderman</small></span>
                 </div>
                 <div class="form-group col">
-                    <input type="datetime" class="form-control" placeholder="Enter your Birthdate" name="BirthDate" />
+                    <span id="errorSpan" asp-validation-for="BirthDate"></span>
+                    <input type="datetime" class="form-control" placeholder="Enter your Birthdate" asp-for="BirthDate" />
+                    <span><small>For instance: 09/06/1969</small></span>
                 </div>
                 <div class="form-group col">
-                    <input type="password" class="form-control" placeholder="Enter Your Password" name="Password" />
+                    <span id="errorSpan" asp-validation-for="Password"></span>
+                    <input type="password" class="form-control" placeholder="Enter Your Password" asp-for="Password" />
                 </div>
                 <div class="form-group col">
-                    <input type="password" class="form-control" placeholder="Enter Your Password Again" name="PasswordCheck" />
+                    <span id="errorSpan" asp-validation-for="PasswordCheck"></span>
+                    <input type="password" class="form-control" placeholder="Enter Your Password Again" asp-for="PasswordCheck" />
                 </div>
                 <div class="form-group col">
                     <button type="submit" class="btn btn-danger btn-block">Register</button>

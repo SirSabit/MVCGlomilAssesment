@@ -79,3 +79,10 @@ body {
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px #000;
 }
+
+#register #errorSpan{
+    color:red;
+    font:12.8px;
+}
+
+

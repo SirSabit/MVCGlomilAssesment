@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Glomil.BLL.Services;
 using Glomil.DAL;
 using Microsoft.AspNetCore.Builder;
@@ -29,7 +30,7 @@ namespace Glomil.MVC
                 y => y.MigrationsAssembly("Glomil.DAL")));
             services.AddScoped<DbContext>(prov => prov.GetService<GlomilDbContext>());
             services.AddBLLObject();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddFluentValidation(x=>x.RegisterValidatorsFromAssemblyContaining<Startup>());
                         
         }
 

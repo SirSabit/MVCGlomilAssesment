@@ -24,6 +24,14 @@ namespace Glomil.MVC.Controllers
         [HttpPost]
         public IActionResult Index(RegisterViewModel vm)
         {
+            if (!ModelState.IsValid)
+            {
+                var messages = ModelState.ToList();
+                
+
+
+                return View(vm);
+            }
             Users newUser = new Users();
             newUser.Name = vm.Name;
             newUser.Surname = vm.Surname;
