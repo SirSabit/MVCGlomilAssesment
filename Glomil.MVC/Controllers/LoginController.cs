@@ -1,6 +1,7 @@
 ﻿using Glomil.BLL.Abstract;
 using Glomil.MVC.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -46,6 +47,13 @@ namespace Glomil.MVC.Controllers
             {
                 return View(vm);
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("index", "Home");
         }
     }
 }
