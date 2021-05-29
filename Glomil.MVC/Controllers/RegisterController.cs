@@ -26,25 +26,25 @@ namespace Glomil.MVC.Controllers
         [HttpPost]
         public IActionResult Index(RegisterViewModel vm)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var messages = ModelState.ToList();
-                
+                Users newUser = new Users();
+                newUser.Name = vm.Name;
+                newUser.Surname = vm.Surname;
+                newUser.NickName = vm.NickName;
+                newUser.Password = vm.Password;
+                newUser.BirthDate = vm.BirthDate;
+                newUser.IsActive = true;
+
+                bLL.AddUser(newUser);
 
 
-                return View(vm);
+
+                return RedirectToAction("Index","Login");
             }
-            Users newUser = new Users();
-            newUser.Name = vm.Name;
-            newUser.Surname = vm.Surname;
-            newUser.NickName = vm.NickName;
-            newUser.Password = vm.Password;
-            newUser.BirthDate = vm.BirthDate;
-            newUser.IsActive = true;
-            
-            bLL.AddUser(newUser);
+           
 
-            return View();
+            return View(vm);
         }
     }
 }

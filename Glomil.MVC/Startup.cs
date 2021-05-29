@@ -49,7 +49,7 @@ namespace Glomil.MVC
                     x.Cookie.Name = "GlomilCookie";
                 });
 
-            //Controller Level Authorization
+           // Controller Level Authorization
             services.AddMvc(conf =>
             {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
@@ -61,6 +61,7 @@ namespace Glomil.MVC
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAuthentication();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

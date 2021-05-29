@@ -1,4 +1,5 @@
 ﻿using Glomil.MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Glomil.MVC.Controllers
 {
+    
     public class HomeController : Controller
     {
        
