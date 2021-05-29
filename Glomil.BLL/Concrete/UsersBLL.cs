@@ -1,5 +1,6 @@
 ﻿using Glomil.BLL.Abstract;
 using Glomil.DAL.Repositories.Abstract;
+using Glomil.Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,14 @@ namespace Glomil.BLL.Concrete
         public UsersBLL(IUsersDal usersDal)
         {
             this.usersDal = usersDal;
+        }
+
+        public List<Users> getUser(string nickName,string password)
+        {
+            var user = usersDal.Get(x => x.NickName == nickName && x.Password == password);
+
+            return user;
+            
         }
     }
 }

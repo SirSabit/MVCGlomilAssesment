@@ -1,0 +1,59 @@
+﻿@model LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="..\lib\bootstrap\dist\css\bootstrap.css" rel="stylesheet" />
+    <title>Index</title>
+    <style>
+        .bg {
+            width: 100%;
+            height: 100vh;
+            background-color: hsla(0, 100%, 90%, 0.3);
+        }
+
+        #login {
+            position: absolute;
+            top: 15vh;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid justify-content-center bg">
+        <div class="row justify-content-center">
+            <div class="col-4">
+            </div>
+            <div class="col-4" id="login">
+                <h3 style="text-align:center">Login</h3>
+                <form asp-action="Index" asp-controller="Login" method="post">
+                    <div class="form-group col">
+                        <input type="text" class="form-control" placeholder="Enter your Nick" name="NickName" />
+                        <small style="text-align:left" id="NickName" class="form-text text-muted">Because Nick Names are cool!</small>
+                    </div>
+                    <div class="form-group col">
+                        <input type="password" class="form-control" placeholder="Enter Your Password" name="Password" />
+                        <small style="text-align:left" id="Password" class="form-text text-muted">We will never share your password!</small>
+                    </div>
+                    <div class="form-group col">
+                        <button type="submit" class="btn btn-danger btn-block">Login</button>
+
+                        <small>Don't have account yet? <a href="#">Register</a></small>
+                    </div>
+                </form>
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+
+</body>
+</html>

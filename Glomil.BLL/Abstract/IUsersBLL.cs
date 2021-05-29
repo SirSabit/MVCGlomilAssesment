@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Glomil.Entities.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace Glomil.BLL.Abstract
 {
    public interface IUsersBLL
     {
+        public List<Users> getUser(string nickName, string password);
     }
 }

@@ -28,6 +28,7 @@ namespace Glomil.MVC
             services.AddDbContext<GlomilDbContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
                 y => y.MigrationsAssembly("Glomil.DAL")));
             services.AddScoped<DbContext>(prov => prov.GetService<GlomilDbContext>());
+            services.AddBLLObject();
             services.AddControllersWithViews();
                         
         }
