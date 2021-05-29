@@ -1,6 +1,7 @@
 ﻿using Glomil.BLL.Abstract;
 using Glomil.Entities.Entities;
 using Glomil.MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Glomil.MVC.Controllers
 {
+    [AllowAnonymous]
     public class RegisterController : Controller
     {
         private IUsersBLL bLL;
