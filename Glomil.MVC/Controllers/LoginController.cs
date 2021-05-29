@@ -24,7 +24,7 @@ namespace Glomil.MVC.Controllers
         [HttpPost]
         public IActionResult Index(LoginViewModel vm)
         {
-            var user=bLL.getUser(vm.NickName, vm.Password);
+            var user=bLL.GetUser(vm.NickName, vm.Password);
             if(user != null)
             {
 

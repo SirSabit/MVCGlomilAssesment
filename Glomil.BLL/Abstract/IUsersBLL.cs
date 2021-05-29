@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Glomil.BLL.Abstract
 {
-   public interface IUsersBLL
+    public interface IUsersBLL
     {
-        public List<Users> getUser(string nickName, string password);
+        public List<Users> GetUser(string nickName, string password);
+        public void AddUser(Users user);
     }
 }

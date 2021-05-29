@@ -17,12 +17,16 @@ namespace Glomil.BLL.Concrete
             this.usersDal = usersDal;
         }
 
-        public List<Users> getUser(string nickName,string password)
+        public List<Users> GetUser(string nickName,string password)
         {
             var user = usersDal.Get(x => x.NickName == nickName && x.Password == password);
 
-            return user;
-            
+            return user;            
+        }
+
+        public void AddUser(Users user)
+        {
+            usersDal.Add(user);            
         }
     }
 }
