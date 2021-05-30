@@ -77,6 +77,13 @@ namespace Glomil.MVC.Controllers
             return View(vm);
 
         }
+        [HttpPost]
+        public IActionResult Profile(HomeViewModel vm)
+        {
+
+
+            return RedirectToAction("index","Profile");
+        }
 
 
     }

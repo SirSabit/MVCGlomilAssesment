@@ -103,7 +103,7 @@
                         <td>@item.Answer</td>
                         <td>
                             @item.User.NickName
-                            <button class="btn btn-outline-info btn-sm">info</button>
+                            <a class="btn btn-outline-info btn-sm" asp-action="index" asp-controller="profile" asp-route-id="@item.UserId">info</a>
                         </td>
                     </tr>
                 }

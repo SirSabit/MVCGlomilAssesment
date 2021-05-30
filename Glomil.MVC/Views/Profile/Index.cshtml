@@ -1,4 +1,4 @@
-﻿@Model ProfileViewModel
+﻿@model ProfileViewModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -26,10 +26,10 @@
             <h3 style="text-align:center">Profile</h3>
            <div class="col">
                <fieldset>
-                   <label><strong>Name</strong></label><input type="text" class="form-control" readonly /><br />
-                   <label><strong>Surname</strong></label><input type="text" class="form-control" readonly /><br />
-                   <label><strong>Nickname</strong></label><input type="text" class="form-control"  readonly /><br />
-                   <label><strong>Birthdate</strong></label><input  type="text" class="form-control" readonly />
+                   <label><strong>Name</strong></label><input type="text" class="form-control" readonly value="@Model.Name" /><br />
+                   <label><strong>Surname</strong></label><input type="text" class="form-control" readonly value="@Model.Surname" /><br />
+                   <label><strong>Nickname</strong></label><input type="text" class="form-control"  readonly value="@Model.Nickname"/><br />
+                   <label><strong>Birthdate</strong></label><input  type="text" class="form-control" readonly value="@Model.BirthDate"/>
                </fieldset>
            </div>
         </div>
