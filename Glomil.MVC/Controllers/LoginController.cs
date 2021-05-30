@@ -1,4 +1,5 @@
 ﻿using Glomil.BLL.Abstract;
+using Glomil.BLL.Services;
 using Glomil.MVC.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -32,6 +33,7 @@ namespace Glomil.MVC.Controllers
             var user=bLL.UserLogin(vm.NickName, vm.Password);
             if (user != null)
             {
+                IdHolder.IDHolder = user.Id;
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name,vm.NickName)

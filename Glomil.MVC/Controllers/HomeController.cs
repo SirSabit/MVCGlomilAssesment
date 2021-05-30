@@ -1,5 +1,6 @@
 ﻿using Glomil.BLL.Abstract;
 using Glomil.BLL.Concrete;
+using Glomil.BLL.Services;
 using Glomil.Entities.Entities;
 using Glomil.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -18,10 +19,11 @@ namespace Glomil.MVC.Controllers
     {
         private IQuestionAnswerBLL answerbLL;
         private IUsersBLL usersBLL;
+        
         public HomeController(IQuestionAnswerBLL answerbLL, IUsersBLL usersBLL)
         {
             this.answerbLL = answerbLL;
-            this.usersBLL = usersBLL;
+            this.usersBLL = usersBLL;            
         }
         public IActionResult Index()
         {
@@ -57,6 +59,15 @@ namespace Glomil.MVC.Controllers
             {
                 vm.Answer = calculations.Multiplication(vm.FirstNumber, vm.SecondNumber);
             }
+
+            QuestionAnswer question = new QuestionAnswer();
+            question.Answer = vm.Answer;
+            question.Question = (vm.FirstNumber + vm.CalculationType + vm.SecondNumber).ToString();
+            question.UserId =IdHolder.IDHolder;
+            answerbLL.AddQuestion(question);
+
+            
+
             vm.QuestionList = answerbLL.GetAllQuestions();
             foreach (var item in vm.QuestionList)
             {

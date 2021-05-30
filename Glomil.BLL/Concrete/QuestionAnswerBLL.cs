@@ -22,5 +22,10 @@ namespace Glomil.BLL.Concrete
         {
             return answerDal.GetAll();
         }
+
+        public void AddQuestion(QuestionAnswer question)
+        {
+            answerDal.Add(question);
+        }
     }
 }

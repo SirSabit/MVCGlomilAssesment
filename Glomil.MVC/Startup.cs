@@ -45,8 +45,8 @@ namespace Glomil.MVC
                 .AddCookie(x =>
                 {
                     x.LoginPath = "/Login/index";
-                    x.ExpireTimeSpan = TimeSpan.FromMinutes(15);
-                    x.Cookie.Name = "GlomilCookie";
+                    x.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+                    x.Cookie.Name = "GlomilCookie";                    
                 });
 
            // Controller Level Authorization
