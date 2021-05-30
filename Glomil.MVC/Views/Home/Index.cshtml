@@ -54,7 +54,7 @@
                             <small style="text-align:left" id="NickName" class="form-text text-muted">First Number</small>
                         </div>
                         <div class="form-group col">
-                            <select id="inputState" class="form-control">
+                            <select id="inputState" class="form-control" asp-for="CalculationType">
                                 <option>+</option>
                                 <option>-</option>
                                 <option>/</option>
@@ -64,6 +64,10 @@
                         <div class="form-group col">
                             <input type="number" class="form-control" placeholder="Second Number" asp-for="SecondNumber" />
                             <small style="text-align:left" id="Password" class="form-text text-muted">Second Number</small>
+                        </div> 
+                        <div class="form-group col">
+                            <input type="number" class="form-control" placeholder="Result" readonly asp-for="Answer" value="@Model.Answer"/>
+                            <small style="text-align:left" class="form-text text-muted">Result</small>                            
                         </div>
                         <div class="form-group col">
                             <button type="submit" class="btn btn-danger btn-block">Calculate</button>
@@ -78,7 +82,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-2""></div>
+        <div class="col-sm-2"></div>
         <div class="col-sm-8" id="resultList">
             <table>
                 <tr>

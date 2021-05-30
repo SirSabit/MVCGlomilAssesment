@@ -9,7 +9,10 @@ namespace Glomil.MVC.Models
     {
         public double FirstNumber { get; set; }
 
+        public string CalculationType { get; set; }
+
         public double SecondNumber { get; set; }
+        public double Answer { get; set; } = 0;
 
         public int UserId { get; set; }
     }
