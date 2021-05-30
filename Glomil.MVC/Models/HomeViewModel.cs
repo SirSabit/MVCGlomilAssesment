@@ -13,7 +13,7 @@ namespace Glomil.MVC.Models
         public string CalculationType { get; set; }
 
         public double SecondNumber { get; set; }
-        public double Answer { get; set; } = 0;
+        public string Answer { get; set; } 
 
         public List<QuestionAnswer> QuestionList { get; set; }
 

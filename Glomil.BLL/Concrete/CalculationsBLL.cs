@@ -8,40 +8,31 @@ namespace Glomil.BLL.Concrete
 {
    public class CalculationsBLL
     {
-        public double Addition(double numberOne,double numberTwo)
+        public string Addition(double numberOne,double numberTwo)
         {
             double result = numberOne + numberTwo;
-            return result;
+            return Convert.ToString(result);
         }
-        public double Subtraction(double numberOne, double numberTwo)
+        public string Subtraction(double numberOne, double numberTwo)
         {
             double result = numberOne - numberTwo;
-            return result;
+            return Convert.ToString(result);
         }
-        public double Multiplication(double numberOne, double numberTwo)
+        public string Multiplication(double numberOne, double numberTwo)
         {
             double result = numberOne * numberTwo;
-            return result;
+            return Convert.ToString(result);
         }
-        public double Division(double numberOne, double numberTwo)
+        public string Division(double numberOne, double numberTwo)
         {
             if (numberTwo != 0) 
             {
             double result = numberOne / numberTwo;
-            return result;
+                return Convert.ToString(result);
             }
             else
             {
-                try
-                {
-                    double result = numberOne / numberTwo;
-                    return result;
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
+               return "Hata";
             }
         }
     }

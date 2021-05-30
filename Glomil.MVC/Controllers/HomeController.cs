@@ -57,8 +57,13 @@ namespace Glomil.MVC.Controllers
             {
                 vm.Answer = calculations.Multiplication(vm.FirstNumber, vm.SecondNumber);
             }
+            vm.QuestionList = answerbLL.GetAllQuestions();
+            foreach (var item in vm.QuestionList)
+            {
+                var user = usersBLL.GetUserbyID(item.UserId);
+            }
 
-            return RedirectToAction("index", "home");
+            return View(vm);
 
         }
 
