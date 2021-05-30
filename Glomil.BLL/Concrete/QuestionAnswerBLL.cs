@@ -1,5 +1,6 @@
 ﻿using Glomil.BLL.Abstract;
 using Glomil.DAL.Repositories.Abstract;
+using Glomil.Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,9 @@ namespace Glomil.BLL.Concrete
             this.answerDal = answerDal;
         }
 
+       public List<QuestionAnswer> GetAllQuestions()
+        {
+            return answerDal.GetAll();
+        }
     }
 }

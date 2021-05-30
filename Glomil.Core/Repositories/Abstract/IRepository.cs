@@ -11,6 +11,10 @@ namespace Glomil.Core.Repositories.Abstract
     {
         int Add(TEntity entity);
 
-        public List<TEntity> Get(Expression<Func<TEntity, bool>> expression);
+        public List<TEntity> GetList(Expression<Func<TEntity, bool>> expression);
+
+        public List<TEntity> GetAll();
+
+        public TEntity GetBy(Expression<Func<TEntity, bool>> expression);
     }
 }

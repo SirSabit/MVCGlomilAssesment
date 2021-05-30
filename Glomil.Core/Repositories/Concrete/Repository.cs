@@ -25,9 +25,21 @@ namespace Glomil.Core.Repositories.Concrete
             return context.SaveChanges();
         }
 
-        public List<TEntity> Get(Expression<Func<TEntity, bool>> expression)
+        public List<TEntity> GetList(Expression<Func<TEntity, bool>> expression)
         {
-            return expression == null ? context.Set<TEntity>().ToList() : context.Set<TEntity>().Where(expression).ToList();
+            return context.Set<TEntity>().Where(expression).ToList();
         }
+
+        public List<TEntity> GetAll()
+        {
+            return context.Set<TEntity>().ToList();
+        }
+
+        public TEntity GetBy(Expression<Func<TEntity, bool>> expression)
+        {
+            TEntity entity = context.Set<TEntity>().Where(expression).SingleOrDefault();
+            return entity;
+        }
+
     }
 }

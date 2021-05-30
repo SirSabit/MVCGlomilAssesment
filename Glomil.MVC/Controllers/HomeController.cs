@@ -1,5 +1,6 @@
 ﻿using Glomil.BLL.Abstract;
 using Glomil.BLL.Concrete;
+using Glomil.Entities.Entities;
 using Glomil.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,14 +13,25 @@ using System.Threading.Tasks;
 
 namespace Glomil.MVC.Controllers
 {
-    
+
     public class HomeController : Controller
     {
-      
-        
+        private IQuestionAnswerBLL answerbLL;
+        private IUsersBLL usersBLL;
+        public HomeController(IQuestionAnswerBLL answerbLL, IUsersBLL usersBLL)
+        {
+            this.answerbLL = answerbLL;
+            this.usersBLL = usersBLL;
+        }
         public IActionResult Index()
         {
-            HomeViewModel vm = new HomeViewModel();
+            HomeViewModel vm = new HomeViewModel();         
+
+            vm.QuestionList = answerbLL.GetAllQuestions();
+            foreach (var item in vm.QuestionList)
+            {
+                var user = usersBLL.GetUserbyID(item.UserId);
+            }
 
             return View(vm);
         }
@@ -28,7 +40,7 @@ namespace Glomil.MVC.Controllers
         public IActionResult Index(HomeViewModel vm)
         {
             CalculationsBLL calculations = new CalculationsBLL();
-            
+
             if (vm.CalculationType == "+")
             {
                 vm.Answer = calculations.Addition(vm.FirstNumber, vm.SecondNumber);
@@ -46,7 +58,7 @@ namespace Glomil.MVC.Controllers
                 vm.Answer = calculations.Multiplication(vm.FirstNumber, vm.SecondNumber);
             }
 
-            return View(vm);
+            return RedirectToAction("index", "home");
 
         }
 

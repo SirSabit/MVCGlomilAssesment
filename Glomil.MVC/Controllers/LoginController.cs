@@ -29,7 +29,7 @@ namespace Glomil.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(LoginViewModel vm)
         {
-            var user=bLL.GetUser(vm.NickName, vm.Password);
+            var user=bLL.UserLogin(vm.NickName, vm.Password);
             if (user != null)
             {
                 var claims = new List<Claim>

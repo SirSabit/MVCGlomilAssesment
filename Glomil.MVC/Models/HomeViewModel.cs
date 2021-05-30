@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Glomil.Entities.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ namespace Glomil.MVC.Models
         public double SecondNumber { get; set; }
         public double Answer { get; set; } = 0;
 
-        public int UserId { get; set; }
+        public List<QuestionAnswer> QuestionList { get; set; }
+
+       
     }
 }
