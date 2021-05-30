@@ -16,8 +16,7 @@
         position: absolute;
         top: 50vh;
         background: #fff;
-        padding: 30px;
-        border-radius: 10px;
+        padding: 30px;        
         box-shadow: 0px 0px 10px 0px #000;
     }
 
@@ -35,6 +34,11 @@
 
     tr:nth-child(even) {
         background-color: #dddddd;
+    }
+    .scroolClass {
+        height: 300px;
+        width:1100px;
+        overflow-y: scroll;
     }
 </style>
 
@@ -88,15 +92,17 @@
     </div>
     <div class="row">
         <div class="col-sm-2"></div>
-        <div class="col-sm-8" id="resultList">
+        <div class="col-sm-8 scroolClass" id="resultList">
             <table>
                 <tr>
                     <th>Question</th>
                     <th>Answer</th>
                     <th>Nick Name</th>
                 </tr>
+                
                 @foreach (var item in Model.QuestionList)
                 {
+                    
                     <tr>
                         <td>@item.Question</td>
                         <td>@item.Answer</td>
