@@ -14,6 +14,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Glomil.MVC.RabbitMQ.Abstract;
+using Glomil.MVC.RabbitMQ;
+using Glomil.MVC.RabbitMQ.Concrete;
 
 namespace Glomil.MVC
 {
@@ -36,7 +39,7 @@ namespace Glomil.MVC
 
             //Scoped Extension
             services.AddBLLObject();
-
+            services.AddScoped<IRabbitPublisher, RabbitPublisher>();
             //Validation
             services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
 

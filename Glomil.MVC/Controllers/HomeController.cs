@@ -3,6 +3,8 @@ using Glomil.BLL.Concrete;
 using Glomil.BLL.Services;
 using Glomil.Entities.Entities;
 using Glomil.MVC.Models;
+using Glomil.MVC.RabbitMQ;
+using Glomil.MVC.RabbitMQ.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -19,11 +21,14 @@ namespace Glomil.MVC.Controllers
     {
         private IQuestionAnswerBLL answerbLL;
         private IUsersBLL usersBLL;
+        private IRabbitPublisher rabbitPublisher;
         
-        public HomeController(IQuestionAnswerBLL answerbLL, IUsersBLL usersBLL)
+
+        public HomeController(IQuestionAnswerBLL answerbLL, IUsersBLL usersBLL,IRabbitPublisher rabbitPublisher)
         {
             this.answerbLL = answerbLL;
-            this.usersBLL = usersBLL;            
+            this.usersBLL = usersBLL;
+            this.rabbitPublisher = rabbitPublisher;
         }
         public IActionResult Index()
         {
@@ -64,6 +69,8 @@ namespace Glomil.MVC.Controllers
             question.Answer = vm.Answer;
             question.Question = (vm.FirstNumber + vm.CalculationType + vm.SecondNumber).ToString();
             question.UserId =IdHolder.IDHolder;
+            rabbitPublisher.CreatePublisher("Queue",question.ToString());
+           
             answerbLL.AddQuestion(question);
 
             
