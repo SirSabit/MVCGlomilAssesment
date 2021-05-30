@@ -1,11 +1,6 @@
 ﻿using Glomil.DAL.Repositories.Abstract;
 using Glomil.DAL.Repositories.Concrete;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Glomil.DAL.Services
 {

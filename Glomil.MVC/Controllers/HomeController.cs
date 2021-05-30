@@ -3,16 +3,8 @@ using Glomil.BLL.Concrete;
 using Glomil.BLL.Services;
 using Glomil.Entities.Entities;
 using Glomil.MVC.Models;
-using Glomil.MVC.RabbitMQ;
 using Glomil.MVC.RabbitMQ.Abstract;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Glomil.MVC.Controllers
 {
@@ -22,9 +14,9 @@ namespace Glomil.MVC.Controllers
         private IQuestionAnswerBLL answerbLL;
         private IUsersBLL usersBLL;
         private IRabbitPublisher rabbitPublisher;
-        
 
-        public HomeController(IQuestionAnswerBLL answerbLL, IUsersBLL usersBLL,IRabbitPublisher rabbitPublisher)
+
+        public HomeController(IQuestionAnswerBLL answerbLL, IUsersBLL usersBLL, IRabbitPublisher rabbitPublisher)
         {
             this.answerbLL = answerbLL;
             this.usersBLL = usersBLL;
@@ -32,7 +24,7 @@ namespace Glomil.MVC.Controllers
         }
         public IActionResult Index()
         {
-            HomeViewModel vm = new HomeViewModel();         
+            HomeViewModel vm = new HomeViewModel();
 
             vm.QuestionList = answerbLL.GetAllQuestions();
             foreach (var item in vm.QuestionList)
@@ -68,12 +60,12 @@ namespace Glomil.MVC.Controllers
             QuestionAnswer question = new QuestionAnswer();
             question.Answer = vm.Answer;
             question.Question = (vm.FirstNumber + vm.CalculationType + vm.SecondNumber).ToString();
-            question.UserId =IdHolder.IDHolder;
-            rabbitPublisher.CreatePublisher("Queue",question.ToString());
-           
+            question.UserId = IdHolder.IDHolder;
+            rabbitPublisher.CreatePublisher("Queue", question.ToString());
+
             answerbLL.AddQuestion(question);
 
-            
+
 
             vm.QuestionList = answerbLL.GetAllQuestions();
             foreach (var item in vm.QuestionList)
@@ -89,7 +81,7 @@ namespace Glomil.MVC.Controllers
         {
 
 
-            return RedirectToAction("index","Profile");
+            return RedirectToAction("index", "Profile");
         }
 
 

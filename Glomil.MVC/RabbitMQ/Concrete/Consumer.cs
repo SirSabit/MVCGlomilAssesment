@@ -1,9 +1,5 @@
 ﻿using RabbitMQ.Client;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Glomil.MVC.RabbitMQ
 {
@@ -20,7 +16,7 @@ namespace Glomil.MVC.RabbitMQ
 
             channel.QueueDeclare(queueName, true, false, false);
 
-          
+
 
         }
     }

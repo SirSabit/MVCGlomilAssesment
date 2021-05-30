@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Glomil.BLL.Concrete
 {
-   public class CalculationsBLL
+    public class CalculationsBLL
     {
-        public string Addition(double numberOne,double numberTwo)
+        public string Addition(double numberOne, double numberTwo)
         {
             double result = numberOne + numberTwo;
             return Convert.ToString(result);
@@ -25,14 +21,14 @@ namespace Glomil.BLL.Concrete
         }
         public string Division(double numberOne, double numberTwo)
         {
-            if (numberTwo != 0) 
+            if (numberTwo != 0)
             {
-            double result = numberOne / numberTwo;
+                double result = numberOne / numberTwo;
                 return Convert.ToString(result);
             }
             else
             {
-               return "Hata";
+                return "Hata";
             }
         }
     }

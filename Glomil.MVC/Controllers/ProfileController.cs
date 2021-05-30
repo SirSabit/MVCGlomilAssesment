@@ -1,11 +1,6 @@
 ﻿using Glomil.BLL.Abstract;
-using Glomil.BLL.Services;
 using Glomil.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Glomil.MVC.Controllers
 {
@@ -15,7 +10,7 @@ namespace Glomil.MVC.Controllers
         public ProfileController(IUsersBLL usersBLL)
         {
             this.usersBLL = usersBLL;
-        }     
+        }
         [HttpGet]
         public IActionResult Index(int id)
         {

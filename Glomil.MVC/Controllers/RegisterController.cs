@@ -3,10 +3,6 @@ using Glomil.Entities.Entities;
 using Glomil.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Glomil.MVC.Controllers
 {
@@ -40,9 +36,9 @@ namespace Glomil.MVC.Controllers
 
 
 
-                return RedirectToAction("Index","Login");
+                return RedirectToAction("Index", "Login");
             }
-           
+
 
             return View(vm);
         }

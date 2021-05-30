@@ -1,22 +1,18 @@
 using FluentValidation.AspNetCore;
 using Glomil.BLL.Services;
 using Glomil.DAL;
+using Glomil.MVC.RabbitMQ;
+using Glomil.MVC.RabbitMQ.Abstract;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using Glomil.MVC.RabbitMQ.Abstract;
-using Glomil.MVC.RabbitMQ;
-using Glomil.MVC.RabbitMQ.Concrete;
 
 namespace Glomil.MVC
 {
@@ -49,10 +45,10 @@ namespace Glomil.MVC
                 {
                     x.LoginPath = "/Login/index";
                     x.ExpireTimeSpan = TimeSpan.FromMinutes(100);
-                    x.Cookie.Name = "GlomilCookie";                    
+                    x.Cookie.Name = "GlomilCookie";
                 });
 
-           // Controller Level Authorization
+            // Controller Level Authorization
             services.AddMvc(conf =>
             {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();

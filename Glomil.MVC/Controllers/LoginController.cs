@@ -5,9 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -30,7 +28,7 @@ namespace Glomil.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(LoginViewModel vm)
         {
-            var user=bLL.UserLogin(vm.NickName, vm.Password);
+            var user = bLL.UserLogin(vm.NickName, vm.Password);
             if (user != null)
             {
                 IdHolder.IDHolder = user.Id;
@@ -38,12 +36,12 @@ namespace Glomil.MVC.Controllers
                 {
                     new Claim(ClaimTypes.Name,vm.NickName)
                 };
-                var userIdentity = new ClaimsIdentity(claims,"GlomilCookie");
+                var userIdentity = new ClaimsIdentity(claims, "GlomilCookie");
                 ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
 
                 await HttpContext.SignInAsync(principal);
 
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
