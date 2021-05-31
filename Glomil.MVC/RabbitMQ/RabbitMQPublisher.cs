@@ -1,10 +1,6 @@
 ﻿using RabbitMQ.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Glomil.MVC.RabbitMQ
 {
@@ -29,7 +25,7 @@ namespace Glomil.MVC.RabbitMQ
 
             properties.Persistent = true;
 
-            channel.BasicPublish(exchange:RabbitMQClientService.ExchangeName, routingKey:RabbitMQClientService.RoutingAnswer, basicProperties: properties, body: bodyByte); 
+            channel.BasicPublish(exchange: RabbitMQClientService.ExchangeName, routingKey: RabbitMQClientService.RoutingAnswer, basicProperties: properties, body: bodyByte);
         }
     }
 }

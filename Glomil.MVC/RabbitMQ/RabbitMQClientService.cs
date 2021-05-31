@@ -1,13 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Glomil.MVC.RabbitMQ
 {
-    public class RabbitMQClientService:IDisposable 
+    public class RabbitMQClientService : IDisposable
     {
         private readonly ConnectionFactory connectionFactory;
         private IConnection connection;
@@ -18,28 +15,28 @@ namespace Glomil.MVC.RabbitMQ
 
         private readonly ILogger<RabbitMQClientService> logger;
 
-        public RabbitMQClientService(ConnectionFactory connectionFactory,ILogger<RabbitMQClientService> logger)
+        public RabbitMQClientService(ConnectionFactory connectionFactory, ILogger<RabbitMQClientService> logger)
         {
             this.logger = logger;
             this.connectionFactory = connectionFactory;
-            
+
         }
 
         public IModel Connect()
         {
             connection = connectionFactory.CreateConnection();
-            if (channel is { IsOpen:true})
+            if (channel is { IsOpen: true })
             {
                 return channel;
             }
 
             channel = connection.CreateModel();
 
-            channel.ExchangeDeclare(ExchangeName,type:"direct",true,false);
+            channel.ExchangeDeclare(ExchangeName, type: "direct", true, false);
 
-            channel.QueueDeclare(QueueName,true,false,false,null);
+            channel.QueueDeclare(QueueName, true, false, false, null);
 
-            channel.QueueBind(exchange:ExchangeName,queue:QueueName,routingKey:RoutingAnswer);
+            channel.QueueBind(exchange: ExchangeName, queue: QueueName, routingKey: RoutingAnswer);
 
             logger.LogInformation("Connected!");
 

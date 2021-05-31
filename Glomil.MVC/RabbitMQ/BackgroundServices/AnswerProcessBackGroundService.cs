@@ -1,13 +1,7 @@
-﻿using Glomil.BLL.Abstract;
-using Glomil.BLL.Concrete;
-using Glomil.Entities.Entities;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
@@ -20,20 +14,20 @@ namespace Glomil.MVC.RabbitMQ.BackgroundServices
         private readonly RabbitMQClientService rabbitMQClientService;
         private readonly ILogger<AnswerProcessBackGroundService> logger;
         private IModel channel;
-        
-        
-     
-        public AnswerProcessBackGroundService(RabbitMQClientService rabbitMQClientService,ILogger<AnswerProcessBackGroundService> logger)
+
+
+
+        public AnswerProcessBackGroundService(RabbitMQClientService rabbitMQClientService, ILogger<AnswerProcessBackGroundService> logger)
         {
             this.logger = logger;
             this.rabbitMQClientService = rabbitMQClientService;
-            
+
         }
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             channel = rabbitMQClientService.Connect();
 
-            channel.BasicQos(0,1,false);
+            channel.BasicQos(0, 1, false);
 
             return base.StartAsync(cancellationToken);
         }
@@ -51,9 +45,9 @@ namespace Glomil.MVC.RabbitMQ.BackgroundServices
         private Task Consumer_Received(object sender, BasicDeliverEventArgs @event)
         {
             var answerCreatedEvent = JsonSerializer.Deserialize<AnswerCreatedEvent>(Encoding.UTF8.GetString(@event.Body.ToArray()));
-                      
-          
-            AnswerFromVMHelperClass.Answer= answerCreatedEvent.Answer;
+
+
+            AnswerFromVMHelperClass.Answer = answerCreatedEvent.Answer;
             AnswerFromVMHelperClass.Question = answerCreatedEvent.Question;
             AnswerFromVMHelperClass.UserId = answerCreatedEvent.UserID;
 

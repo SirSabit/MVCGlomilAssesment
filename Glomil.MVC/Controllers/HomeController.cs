@@ -57,13 +57,13 @@ namespace Glomil.MVC.Controllers
             {
                 vm.Answer = calculationBLL.Multiplication(vm.FirstNumber, vm.SecondNumber);
             }
-            rabbitMQPublisher.Publish(new AnswerCreatedEvent() { Answer = vm.Answer,Question= ((vm.FirstNumber + vm.CalculationType + vm.SecondNumber).ToString()),UserID=IdHolder.IDHolder.ToString() });
+            rabbitMQPublisher.Publish(new AnswerCreatedEvent() { Answer = vm.Answer, Question = ((vm.FirstNumber + vm.CalculationType + vm.SecondNumber).ToString()), UserID = IdHolder.IDHolder.ToString() });
 
-            
+
             QuestionAnswer question = new QuestionAnswer();
             question.Answer = AnswerFromVMHelperClass.Answer;
             question.Question = AnswerFromVMHelperClass.Question;
-            question.UserId = Convert.ToInt32(AnswerFromVMHelperClass.UserId);
+            question.UserId = IdHolder.IDHolder;
 
             answerbLL.AddQuestion(question);
 

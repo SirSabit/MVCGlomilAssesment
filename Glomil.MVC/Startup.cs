@@ -29,11 +29,11 @@ namespace Glomil.MVC
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton(sp => new ConnectionFactory() { Uri = new Uri(Configuration.GetConnectionString("RabbitMQ")), DispatchConsumersAsync=true });
+            services.AddSingleton(sp => new ConnectionFactory() { Uri = new Uri(Configuration.GetConnectionString("RabbitMQ")), DispatchConsumersAsync = true });
             services.AddSingleton<RabbitMQClientService>();
             services.AddSingleton<RabbitMQPublisher>();
             services.AddHostedService<AnswerProcessBackGroundService>();
-           
+
             services.AddDbContext<GlomilDbContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
                 y => y.MigrationsAssembly("Glomil.DAL")));
 

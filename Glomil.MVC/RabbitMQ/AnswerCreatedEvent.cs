@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Glomil.MVC.RabbitMQ
+﻿namespace Glomil.MVC.RabbitMQ
 {
     public class AnswerCreatedEvent
     {
