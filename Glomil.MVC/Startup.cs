@@ -1,8 +1,6 @@
 using FluentValidation.AspNetCore;
 using Glomil.BLL.Services;
 using Glomil.DAL;
-using Glomil.MVC.RabbitMQ;
-using Glomil.MVC.RabbitMQ.Abstract;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -34,7 +32,7 @@ namespace Glomil.MVC
             services.AddScoped<DbContext>(prov => prov.GetService<GlomilDbContext>());
 
             //Scoped Extension
-            services.AddBLLObject();           
+            services.AddBLLObject();
             //Validation
             services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
 

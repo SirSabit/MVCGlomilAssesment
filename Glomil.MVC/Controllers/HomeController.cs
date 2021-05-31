@@ -1,12 +1,8 @@
 ﻿using Glomil.BLL.Abstract;
-using Glomil.BLL.Concrete;
 using Glomil.BLL.Services;
 using Glomil.Entities.Entities;
 using Glomil.MVC.Models;
-using Glomil.MVC.RabbitMQ.Abstract;
-using Glomil.MVC.RabbitMQ.HelperClass;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace Glomil.MVC.Controllers
 {
@@ -15,16 +11,16 @@ namespace Glomil.MVC.Controllers
     {
         private IQuestionAnswerBLL answerbLL;
         private IUsersBLL usersBLL;
-        
+
         private ICalculationBLL calculationBLL;
 
 
-        public HomeController(IQuestionAnswerBLL answerbLL, IUsersBLL usersBLL,ICalculationBLL calculationBLL)
+        public HomeController(IQuestionAnswerBLL answerbLL, IUsersBLL usersBLL, ICalculationBLL calculationBLL)
         {
             this.answerbLL = answerbLL;
             this.usersBLL = usersBLL;
             this.calculationBLL = calculationBLL;
-            
+
         }
         public IActionResult Index()
         {

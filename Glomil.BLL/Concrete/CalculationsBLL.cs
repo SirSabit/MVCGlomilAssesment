@@ -3,7 +3,7 @@ using System;
 
 namespace Glomil.BLL.Concrete
 {
-    public class CalculationsBLL:ICalculationBLL
+    public class CalculationsBLL : ICalculationBLL
     {
         public string Addition(double numberOne, double numberTwo)
         {
