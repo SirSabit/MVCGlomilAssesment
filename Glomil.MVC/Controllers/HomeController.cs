@@ -2,7 +2,9 @@
 using Glomil.BLL.Services;
 using Glomil.Entities.Entities;
 using Glomil.MVC.Models;
+using Glomil.MVC.RabbitMQ;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Glomil.MVC.Controllers
 {
@@ -11,16 +13,16 @@ namespace Glomil.MVC.Controllers
     {
         private IQuestionAnswerBLL answerbLL;
         private IUsersBLL usersBLL;
-
+        private RabbitMQPublisher rabbitMQPublisher;
         private ICalculationBLL calculationBLL;
 
 
-        public HomeController(IQuestionAnswerBLL answerbLL, IUsersBLL usersBLL, ICalculationBLL calculationBLL)
+        public HomeController(IQuestionAnswerBLL answerbLL, IUsersBLL usersBLL, ICalculationBLL calculationBLL, RabbitMQPublisher rabbitMQPublisher)
         {
             this.answerbLL = answerbLL;
             this.usersBLL = usersBLL;
             this.calculationBLL = calculationBLL;
-
+            this.rabbitMQPublisher = rabbitMQPublisher;
         }
         public IActionResult Index()
         {
@@ -55,10 +57,13 @@ namespace Glomil.MVC.Controllers
             {
                 vm.Answer = calculationBLL.Multiplication(vm.FirstNumber, vm.SecondNumber);
             }
+            rabbitMQPublisher.Publish(new AnswerCreatedEvent() { Answer = vm.Answer,Question= ((vm.FirstNumber + vm.CalculationType + vm.SecondNumber).ToString()),UserID=IdHolder.IDHolder.ToString() });
+
+            
             QuestionAnswer question = new QuestionAnswer();
-            question.Answer = vm.Answer;
-            question.Question = (vm.FirstNumber + vm.CalculationType + vm.SecondNumber).ToString();
-            question.UserId = IdHolder.IDHolder;
+            question.Answer = AnswerFromVMHelperClass.Answer;
+            question.Question = AnswerFromVMHelperClass.Question;
+            question.UserId = Convert.ToInt32(AnswerFromVMHelperClass.UserId);
 
             answerbLL.AddQuestion(question);
 

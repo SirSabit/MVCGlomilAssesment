@@ -1,6 +1,8 @@
 using FluentValidation.AspNetCore;
 using Glomil.BLL.Services;
 using Glomil.DAL;
+using Glomil.MVC.RabbitMQ;
+using Glomil.MVC.RabbitMQ.BackgroundServices;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -10,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RabbitMQ.Client;
 using System;
 
 namespace Glomil.MVC
@@ -26,6 +29,11 @@ namespace Glomil.MVC
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(sp => new ConnectionFactory() { Uri = new Uri(Configuration.GetConnectionString("RabbitMQ")), DispatchConsumersAsync=true });
+            services.AddSingleton<RabbitMQClientService>();
+            services.AddSingleton<RabbitMQPublisher>();
+            services.AddHostedService<AnswerProcessBackGroundService>();
+           
             services.AddDbContext<GlomilDbContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
                 y => y.MigrationsAssembly("Glomil.DAL")));
 
@@ -33,6 +41,7 @@ namespace Glomil.MVC
 
             //Scoped Extension
             services.AddBLLObject();
+
             //Validation
             services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
 
