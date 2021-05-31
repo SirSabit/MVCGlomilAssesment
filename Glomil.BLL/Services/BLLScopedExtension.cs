@@ -12,6 +12,7 @@ namespace Glomil.BLL.Services
             services.AddDalObject();
             services.AddScoped<IUsersBLL, UsersBLL>();
             services.AddScoped<IQuestionAnswerBLL, QuestionAnswerBLL>();
+            services.AddScoped<ICalculationBLL, CalculationsBLL>();
         }
     }
 }

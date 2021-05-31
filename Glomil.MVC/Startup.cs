@@ -34,8 +34,7 @@ namespace Glomil.MVC
             services.AddScoped<DbContext>(prov => prov.GetService<GlomilDbContext>());
 
             //Scoped Extension
-            services.AddBLLObject();
-            services.AddScoped<IRabbitPublisher, RabbitPublisher>();
+            services.AddBLLObject();           
             //Validation
             services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>());
 
@@ -44,7 +43,7 @@ namespace Glomil.MVC
                 .AddCookie(x =>
                 {
                     x.LoginPath = "/Login/index";
-                    x.ExpireTimeSpan = TimeSpan.FromMinutes(100);
+                    x.ExpireTimeSpan = TimeSpan.FromMinutes(1);
                     x.Cookie.Name = "GlomilCookie";
                 });
 

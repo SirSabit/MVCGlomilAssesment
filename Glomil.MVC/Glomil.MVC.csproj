@@ -21,4 +21,9 @@
     <ProjectReference Include="..\Glomil.BLL\Glomil.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="RabbitMQ\Abstract\" />
+    <Folder Include="RabbitMQ\Concrete\" />
+  </ItemGroup>
+
 </Project>

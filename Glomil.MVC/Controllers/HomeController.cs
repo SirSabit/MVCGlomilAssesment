@@ -4,7 +4,9 @@ using Glomil.BLL.Services;
 using Glomil.Entities.Entities;
 using Glomil.MVC.Models;
 using Glomil.MVC.RabbitMQ.Abstract;
+using Glomil.MVC.RabbitMQ.HelperClass;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Glomil.MVC.Controllers
 {
@@ -13,14 +15,16 @@ namespace Glomil.MVC.Controllers
     {
         private IQuestionAnswerBLL answerbLL;
         private IUsersBLL usersBLL;
-        private IRabbitPublisher rabbitPublisher;
+        
+        private ICalculationBLL calculationBLL;
 
 
-        public HomeController(IQuestionAnswerBLL answerbLL, IUsersBLL usersBLL, IRabbitPublisher rabbitPublisher)
+        public HomeController(IQuestionAnswerBLL answerbLL, IUsersBLL usersBLL,ICalculationBLL calculationBLL)
         {
             this.answerbLL = answerbLL;
             this.usersBLL = usersBLL;
-            this.rabbitPublisher = rabbitPublisher;
+            this.calculationBLL = calculationBLL;
+            
         }
         public IActionResult Index()
         {
@@ -38,30 +42,27 @@ namespace Glomil.MVC.Controllers
         [HttpPost]
         public IActionResult Index(HomeViewModel vm)
         {
-            CalculationsBLL calculations = new CalculationsBLL();
 
             if (vm.CalculationType == "+")
             {
-                vm.Answer = calculations.Addition(vm.FirstNumber, vm.SecondNumber);
+                vm.Answer = calculationBLL.Addition(vm.FirstNumber, vm.SecondNumber);
             }
             else if (vm.CalculationType == "-")
             {
-                vm.Answer = calculations.Subtraction(vm.FirstNumber, vm.SecondNumber);
+                vm.Answer = calculationBLL.Subtraction(vm.FirstNumber, vm.SecondNumber);
             }
             else if (vm.CalculationType == "/")
             {
-                vm.Answer = calculations.Division(vm.FirstNumber, vm.SecondNumber);
+                vm.Answer = calculationBLL.Division(vm.FirstNumber, vm.SecondNumber);
             }
             else if (vm.CalculationType == "*")
             {
-                vm.Answer = calculations.Multiplication(vm.FirstNumber, vm.SecondNumber);
+                vm.Answer = calculationBLL.Multiplication(vm.FirstNumber, vm.SecondNumber);
             }
-
             QuestionAnswer question = new QuestionAnswer();
             question.Answer = vm.Answer;
             question.Question = (vm.FirstNumber + vm.CalculationType + vm.SecondNumber).ToString();
             question.UserId = IdHolder.IDHolder;
-            rabbitPublisher.CreatePublisher("Queue", question.ToString());
 
             answerbLL.AddQuestion(question);
 

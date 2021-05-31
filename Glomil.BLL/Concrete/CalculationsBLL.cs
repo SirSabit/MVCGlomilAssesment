@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Glomil.BLL.Abstract;
+using System;
 
 namespace Glomil.BLL.Concrete
 {
-    public class CalculationsBLL
+    public class CalculationsBLL:ICalculationBLL
     {
         public string Addition(double numberOne, double numberTwo)
         {
